@@ -1,6 +1,7 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["views"]
+  binaryTargets   = ["native"]
 }
 
 datasource db {
@@ -13,6 +14,7 @@ model User {
   name      String
   email     String    @unique
   password  String    @db.VarChar(255)
+  published Boolean   @default(true)
   createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp(3)
   updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamp(3)
   posts     Post[]    @relation("WrittenPosts")
@@ -25,7 +27,6 @@ model Post {
   userId    String    @map("user_id") @db.Uuid
   title     String    @unique
   content   String?   @db.Text
-  published Boolean   @default(true)
   good      Int       @default(0)
   createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp(3)
   updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamp(3)

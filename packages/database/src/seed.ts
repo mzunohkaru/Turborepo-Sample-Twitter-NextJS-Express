@@ -14,7 +14,6 @@ async function Seed() {
         postId: uuidv4(),
         title: "初めまして",
         content: "今日からよろしくお願いします！",
-        published: true,
         good: 0,
       },
     },
