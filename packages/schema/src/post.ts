@@ -23,3 +23,14 @@ const PostResponse = z.object({
 });
 
 export type PostResponse = z.infer<typeof PostResponse>;
+
+const Post = z.object({
+  username: z.string(),
+  handle: z.string(),
+  title: z.string(),
+  content: z.string(),
+  good: z.number(),
+  createdAt: z.date(),
+});
+
+export type Post = z.infer<typeof Post>;

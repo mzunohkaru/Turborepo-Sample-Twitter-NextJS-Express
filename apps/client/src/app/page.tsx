@@ -1,34 +1,33 @@
 "use client";
 
-import { CustomLink } from "@/components/Link";
-import { Footer } from "@/components/Footer";
+import { SetStateAction, useState } from "react";
+
+import { Card } from "@/components/post/Card";
+import Form from "@/components/post/Form";
 import { useUser } from "@/hook/use-user";
 
-export default function Home() {
-  const { userData, error } = useUser();
-  console.log("SWR", userData);
+const posts = Array(20).fill({
+  username: "田中",
+  handle: "@tanaka1234",
+  title: "こんにちは",
+  content: "初めまして〜",
+  good: 10,
+  createdAt: "15h",
+});
 
-  const handlePokemon = async () => {
-    // await trigger();
-    // console.log("triggerData", triggerData);
-  };
+export default function Home() {
+  // const user = useUser();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
+    <main>
+      <div>
+      <Form />
       </div>
-
-      <button onClick={handlePokemon}>
-        Trigger
-      </button>
-
-      <Footer />
-
-      <CustomLink />
+      <ul>
+        {posts.map((post, index) => (
+          <Card key={index} {...post} index={index} />
+        ))}
+      </ul>
     </main>
   );
 }

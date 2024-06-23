@@ -1,2 +1,2 @@
 export { UserResponse } from "./user";
-export { PostResponse } from "./post";
+export { PostResponse, Post } from "./post";
