@@ -7,7 +7,7 @@ import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined
 import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined";
 import FlatwareOutlinedIcon from "@mui/icons-material/FlatwareOutlined";
 
-function Form() {
+export function Form() {
   const textRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
@@ -18,16 +18,13 @@ function Form() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-gray-800 p-4 rounded-lg shadow-md mb-4 fixed top-0 w-1/2"
-    >
+    <form onSubmit={handleSubmit}>
       <div className="flex items-center mb-4">
         <input
           type="text"
           ref={textRef}
           placeholder="What is happening?!"
-          className="flex-grow p-2 bg-gray-700 text-white rounded-lg focus:outline-none"
+          className="border p-2 rounded w-full"
         />
       </div>
       <div className="flex justify-between items-center">
@@ -61,5 +58,3 @@ function Form() {
     </form>
   );
 }
-
-export default Form;

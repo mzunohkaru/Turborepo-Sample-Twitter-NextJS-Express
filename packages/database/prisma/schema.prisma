@@ -10,7 +10,7 @@ datasource db {
 }
 
 model User {
-  userId    String    @default(uuid()) @map("user_id") @db.Uuid @unique
+  userId    String    @unique @default(uuid()) @map("user_id") @db.Uuid
   name      String
   email     String    @unique
   password  String    @db.VarChar(255)
@@ -25,8 +25,7 @@ model User {
 model Post {
   postId    String    @id @default(uuid()) @map("post_id") @db.Uuid
   userId    String    @map("user_id") @db.Uuid
-  title     String    @unique
-  content   String?   @db.Text
+  content   String    @db.Text
   good      Int       @default(0)
   createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp(3)
   updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamp(3)
