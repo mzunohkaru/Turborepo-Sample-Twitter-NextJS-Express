@@ -1,0 +1,5 @@
+
+> client@0.0.0 lint /Users/machikaru/ドキュメント/MyNextjs/turbo-sample/apps/client
+> next lint
+
+[32m✔ No ESLint warnings or errors[39m

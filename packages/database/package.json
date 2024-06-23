@@ -1,0 +1,32 @@
+{
+  "name": "@repo/database",
+  "version": "0.0.0",
+  "private": "true",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "db:migrate": "pnpm dlx prisma migrate dev --name init",
+    "db:deploy": "pnpm dlx prisma migrate deploy",
+    "db:generate": "pnpm dlx prisma generate",
+    "db:seed": "ts-node src/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@repo/schema": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^20.11.24",
+    "@types/uuid": "^9.0.8",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.13.0",
+    "prisma": "^5.13.0",
+    "typescript": "^5.4.5",
+    "uuid": "^10.0.0"
+  }
+}

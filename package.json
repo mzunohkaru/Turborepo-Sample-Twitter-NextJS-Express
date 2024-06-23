@@ -1,0 +1,35 @@
+{
+  "name": "turbo-sample",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "build:prod": "turbo build:prod",
+    "build:stg": "turbo build:stg",
+    "build:dev": "turbo build:dev",
+    "start": "turbo start",
+    "dev": "turbo dev",
+    "dev:client": "turbo dev --filter=client",
+    "dev:server": "turbo dev --filter=server",
+    "docker": "docker compose up --build",
+    "docker:db": "docker compose -f docker-compose.local.yaml up -d",
+    "check": "turbo check",
+    "tsc": "turbo tsc",
+    "lint": "turbo lint",
+    "format:fix": "turbo format:fix",
+    "db:deploy": "turbo db:deploy",
+    "db:generate": "turbo db:generate",
+    "db:studio": "turbo db:studio"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "prettier": "^3.2.5",
+    "turbo": "latest",
+    "typescript": "^5.4.5"
+  },
+  "packageManager": "pnpm@8.15.6",
+  "engines": {
+    "node": ">=20"
+  }
+}
