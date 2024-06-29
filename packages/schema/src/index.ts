@@ -1,2 +1,2 @@
-export { UserResponse } from "./user";
-export { PostResponse, Post } from "./post";
+export { RequestCreateUser, ResponseUser } from "./user";
+export { RequestCreatePost, ResponsePost } from "./post";

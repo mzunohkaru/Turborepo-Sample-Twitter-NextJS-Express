@@ -1,26 +1,17 @@
 import z from "zod";
 
-import { PostRequest } from "./post";
-
-const UserRequest = z.object({
-  userId: z.string().uuid(),
+const RequestCreateUser = z.object({
   name: z.string(),
   email: z.string().email(),
   password: z.string(),
-  posts: z.object({}).nullish(),
-  createdAt: z.date().nullish(),
-  updatedAt: z.date().nullish(),
 });
 
-export type UserRequest = z.infer<typeof UserRequest>;
+export type RequestCreateUser = z.infer<typeof RequestCreateUser>;
 
-const UserResponse = z.object({
+const ResponseUser = z.object({
   userId: z.string().uuid(),
   name: z.string(),
   email: z.string().email(),
-  password: z.string(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
 });
 
-export type UserResponse = z.infer<typeof UserResponse>;
+export type ResponseUser = z.infer<typeof ResponseUser>;

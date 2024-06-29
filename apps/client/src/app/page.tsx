@@ -4,52 +4,13 @@ import { Sidebar } from "@/components/Sidebar";
 import { Post } from "@/components/Post";
 import { Form } from "@/components/Form";
 
-const posts = [
-  {
-    username: "tarako25",
-    content: "test10",
-    good: 10,
-    createdAt: "2024/1/22 21:32:22",
-  },
-  {
-    username: "tarako25",
-    content: "test9",
-    good: 200,
-    createdAt: "2024/1/22 21:32:16",
-  },
-  {
-    username: "tarako25",
-    content: "test8",
-    good: 0,
-    createdAt: "2024/1/22 21:32:12",
-  },
-  {
-    username: "tarako25",
-    content: "test7",
-    good: 2,
-    createdAt: "2024/1/22 21:32:09",
-  },
-  {
-    username: "tarako25",
-    content: "test6",
-    good: 3,
-    createdAt: "2024/1/22 21:32:06",
-  },
-  {
-    username: "tarako25",
-    content: "test5",
-    good: 4,
-    createdAt: "2024/1/22 21:32:03",
-  },
-  {
-    username: "tarako25",
-    content: "test4",
-    good: 5,
-    createdAt: "2024/1/22 21:22:59",
-  },
-];
+import { useUser } from "@/hook/use-user";
+import { usePost } from "@/hook/use-post";
 
 export default function Home() {
+  const { userData, userError } = useUser();
+  const { postData, postError } = usePost();
+
   return (
     <div className="flex">
       <Sidebar />
@@ -71,8 +32,8 @@ export default function Home() {
         <div className="mb-4">
           <Form />
         </div>
-        {posts.map((post, index) => (
-          <Post key={index} {...post} />
+        {postData && postData.map((post) => (
+          <Post key={post.postId} {...post} />
         ))}
         <div className="flex justify-center mt-4">
           <button className="border p-2 rounded mx-1">1</button>
