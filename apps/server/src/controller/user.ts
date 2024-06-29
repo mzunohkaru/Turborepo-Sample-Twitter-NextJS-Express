@@ -29,8 +29,17 @@ export const getUsers = async (
 ) => {
   try {
     const users = await prisma.user.findMany({
-      include: {
-        posts: true,
+      select: {
+        userId: true,
+        name: true,
+        email: true,
+        posts: {
+          select: {
+            postId: true,
+            content: true,
+            createdAt: true,
+          },
+        },
       },
     });
     res.status(200).json(users);

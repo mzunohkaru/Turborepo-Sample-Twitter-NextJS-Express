@@ -7,13 +7,20 @@ import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined
 import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined";
 import FlatwareOutlinedIcon from "@mui/icons-material/FlatwareOutlined";
 
+import { usePost } from "@/hook/use-post";
+
 export function Form() {
+  const { trigger } = usePost();
   const textRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     if (textRef.current) {
-      console.log("Submitted text:", textRef.current.value);
+      trigger({
+        userId: "359a2a4e-8889-4620-ad4b-9c20ce47408d",
+        content: textRef.current.value,
+        published: true,
+      });
     }
   };
 

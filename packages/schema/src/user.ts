@@ -1,7 +1,5 @@
 import z from "zod";
 
-import { PostRequest } from "./post";
-
 const RequestCreateUser = z.object({
   name: z.string(),
   email: z.string().email(),
@@ -10,13 +8,10 @@ const RequestCreateUser = z.object({
 
 export type RequestCreateUser = z.infer<typeof RequestCreateUser>;
 
-const UserResponse = z.object({
+const ResponseUser = z.object({
   userId: z.string().uuid(),
   name: z.string(),
   email: z.string().email(),
-  password: z.string(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
 });
 
-export type UserResponse = z.infer<typeof UserResponse>;
+export type ResponseUser = z.infer<typeof ResponseUser>;

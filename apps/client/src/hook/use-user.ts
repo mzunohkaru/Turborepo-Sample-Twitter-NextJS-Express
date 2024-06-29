@@ -1,7 +1,7 @@
 import swr from "swr";
 import { AxiosError } from "axios";
 
-import { UserResponse } from "@repo/schema";
+import { RequestCreateUser, ResponseUser  } from "@repo/schema";
 import { getFetcher } from "@/lib/fetch";
 
 const url = "http://localhost:8080/api/user";
@@ -9,27 +9,29 @@ const url = "http://localhost:8080/api/user";
 // const fetcher = async (url: string, { arg }: { arg: string }) => {
 const fetcher = async (url: string) => {
   try {
-    const res: UserResponse = await getFetcher(url);
+    const res: ResponseUser = await getFetcher(url);
     return res;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
 
 export function useUser() {
-  const { data: userData, error } = swr<UserResponse>(url, fetcher, {
+  const { data: userData, error: userError } = swr<ResponseUser>(url, fetcher, {
     onSuccess: (data) => {
       console.log("success", data);
     },
     onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
         if (retryCount > 1) return;
+
         if(error instanceof AxiosError) {
             if(error.response?.status === 401) return
         }
+
         if (error.status === 404) return
 
-        console.log("retry", error);
+        console.error("Retry User Data Fetcher", error);
       },
     shouldRetryOnError: true,
     // dev
@@ -38,5 +40,6 @@ export function useUser() {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
-  return { userData, error };
+
+  return { userData, userError };
 }

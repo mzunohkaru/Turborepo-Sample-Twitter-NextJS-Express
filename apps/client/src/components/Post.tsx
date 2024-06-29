@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { format } from "date-fns";
 
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
@@ -6,18 +7,30 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import LocalFireDepartmentRoundedIcon from "@mui/icons-material/LocalFireDepartmentRounded";
 import ReplyRoundedIcon from "@mui/icons-material/ReplyRounded";
 
-type Props = {
-  username: string;
-  content: string;
-  good: number;
-  createdAt: string;
-};
+import { ResponseUser } from "@repo/schema";
+import { usePost } from "@/hook/use-post";
 
-export function Post({ username, content, good, createdAt }: Props) {
+// type Props = {
+//   postId: string;
+//   content: string;
+//   good: number;
+//   createdAt: Date;
+//   user: ResponseUser;
+// };
+
+type Props = NonNullable<ReturnType<typeof usePost>["postData"]>[number];
+
+export function Post({ postId, content, good, createdAt, user }: Props) {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const handleFavoriteClick = () => {
-    setIsFavorite(!isFavorite);
+  const formattedDate = format(new Date(createdAt), "yyyy-MM-dd HH:mm:ss");
+
+  const handleGoodClick = () => {
+    setIsFavorite(true);
+  };
+
+  const handleBadClick = () => {
+    setIsFavorite(false);
   };
 
   const handleCommentClick = () => {
@@ -29,15 +42,17 @@ export function Post({ username, content, good, createdAt }: Props) {
       <div className="flex items-center mb-2">
         <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
         <div className="ml-2">
-          <div className="font-bold">{username}</div>
-          <div className="text-gray-500">{createdAt}</div>
+          <div className="font-bold">
+            {user.name} <span className="text-gray-500">@{user.email}</span>
+          </div>
+          <div className="text-gray-500">{formattedDate}</div>
         </div>
       </div>
       <div>{content}</div>
       <div className="flex mt-2 justify-between">
         <div
           className="text-black whitespace-pre-line"
-          onClick={handleFavoriteClick}
+          onClick={isFavorite ? handleBadClick : handleGoodClick}
         >
           {isFavorite ? (
             <FavoriteOutlinedIcon className="text-red-500" />
@@ -52,7 +67,7 @@ export function Post({ username, content, good, createdAt }: Props) {
         >
           <ChatBubbleOutlineIcon className="text-gray-500" />
 
-          {0}
+          {good}
         </div>
 
         <div

@@ -42,6 +42,7 @@ export const getPosts = async (
           select: {
             userId: true,
             name: true,
+            email: true,
           },
         },
       },
